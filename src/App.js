@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import Navbar from './Navbar'
 import Mockup from './Mockup'
+import RegisteredActivities from './RegisteredActivities'
 import './App.css';
 
 class App extends Component {
@@ -10,7 +11,7 @@ class App extends Component {
       <div className="App w-100 h-100">
         <Navbar/>
         <div className="container">
-          <Mockup/>
+          <RegisteredActivities/>
         </div>
         
       </div>
