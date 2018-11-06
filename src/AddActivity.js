@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import './ActivityModal';
-import ActivityModal from './ActivityModal';
+import './AddActivityModal';
+import ActivityModal from './AddActivityModal';
 
 
 export default class AddActivity extends Component {
@@ -20,11 +20,11 @@ export default class AddActivity extends Component {
     render(){
         return(
             <div className="col-sm-4">
-                <div class="card text-white bg-secondary mb-3" style={{"maxWidth": "18rem"}}>
-                    <div class="card-header">Add an Activity</div>
-                    <div class="card-body">
-                        <h5 class="card-title"></h5>
-                        <p class="card-text"></p>
+                <div className="card text-white bg-secondary mb-3" style={{"maxWidth": "18rem"}}>
+                    <div className="card-header">Add an Activity</div>
+                    <div className="card-body">
+                        <h5 className="card-title"></h5>
+                        <p className="card-text"></p>
                         <button className="btn btn-block btn-secondary" data-toggle="modal" data-target="#addActivity"><i className="material-icons align-middle">add</i></button>
                     </div>
                 </div>

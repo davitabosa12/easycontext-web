@@ -14,9 +14,7 @@ export default class RegisteredActivities extends Component {
     }
     
     componentDidMount(){
-        this.setState((state, props) => ({
-            activitiesList: [{packet:"lopl", class:"teste"}]
-        }));
+       
     }
     /**
      * Adiciona a nova activity na lista dentro do props.
@@ -60,7 +58,7 @@ export default class RegisteredActivities extends Component {
         
         
         return (
-            <Activity activityPacket={activity.packet} activityClass={activity.class} text={text}/>
+            <Activity key ={`${activity.packet}.${activity.class}`} activityPacket={activity.packet} activityClass={activity.class} text={text}/>
         )
     }
     _renderActivitiesList(activitiesList){

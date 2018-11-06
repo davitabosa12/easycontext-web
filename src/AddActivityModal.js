@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-export default class ActivityModal extends Component {
+export default class AddActivityModal extends Component {
     constructor(props){
         super(props);
         this._newActivity = this._newActivity.bind(this);
@@ -20,16 +20,16 @@ export default class ActivityModal extends Component {
     }
     render(){
         return(
-            <div class="modal fade" id={this.props.modalId} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Add a new Activity</h5>
-        <button type="button" class="close" onClick={this._cleanData} data-dismiss="modal" aria-label="Close">
+            <div className="modal fade" id={this.props.modalId} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div className="modal-dialog modal-dialog-centered" role="document">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h5 className="modal-title" id="exampleModalLongTitle">Add a new Activity</h5>
+        <button type="button" className="close" onClick={this._cleanData} data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div className="modal-body">
         <form>
             <div className="form-group">
                 <label htmlFor="activityPacket" className="col-form-label">Packet Name</label>
@@ -42,9 +42,9 @@ export default class ActivityModal extends Component {
             
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" onClick={this._cleanData} data-dismiss="modal">Close</button>
-        <button type="button" data-dismiss="modal" class="btn btn-primary" onClick={this._newActivity}>Save changes</button>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-secondary" onClick={this._cleanData} data-dismiss="modal">Close</button>
+        <button type="button" data-dismiss="modal" className="btn btn-primary" onClick={this._newActivity}>Save changes</button>
       </div>
     </div>
   </div>
