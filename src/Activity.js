@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import ActivityEdit from './FenceForm';
 
 
 export default class Activity extends Component {
@@ -12,8 +13,8 @@ export default class Activity extends Component {
             snapshots: [],
         };
     }
-    callModal(){
-        console.log("call a modal!");
+    _callModal(){
+        console.log("oi")
     }
     render() {
         return (
@@ -22,9 +23,9 @@ export default class Activity extends Component {
                     <div className="card-header">
                         <div className="row">
                             
-                            <div className="float-right">
+                            <span className=" ml-auto pull-right">
                                 <button className="btn close"><i className="align-middle material-icons">close</i></button>
-                            </div>                            
+                            </span>                            
                         </div>
 
                     </div>
@@ -32,7 +33,8 @@ export default class Activity extends Component {
                         <p className="">{this.props.activityPacket}</p>
                         <h5 className="card-title">{this.props.activityClass}</h5>
                         <p className="card-text">{this.props.text}</p>
-                        <button className="btn btn-secondary" onClick={this.callModal}>Edit</button>
+                        <button className="btn btn-secondary" data-toggle="modal" data-target="#activityEdit">Edit</button>
+                        <ActivityEdit modalId="activityEdit" fences={this.state.fences} snapshots={this.state.snapshots} />
                     </div>
                 </div>
             </div>
