@@ -13,9 +13,9 @@ export default class MethodForm extends Component {
     
     
     componentDidUpdate(prevProps, prevState){
-
+        //Checar se os props que eu recebi realmente sao diferentes dos props que eu ja tinha
+        //isto evita recursao
         if(prevState.fenceType !== this.props.type){
-            //Perform some operation here
             this.setState({
                 fenceType: this.props.type,
             })

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import ActivityEdit from './FenceForm';
+import ActivityEdit from './ActivityEdit';
 
 
 export default class Activity extends Component {
@@ -12,9 +12,11 @@ export default class Activity extends Component {
             fences: [],
             snapshots: [],
         };
+        this._callActivityEdit = this._callActivityEdit.bind(this);
     }
-    _callModal(){
-        console.log("oi")
+    _callActivityEdit(ev){
+        var settings = document.getElementById(this.props.id+"-activity-edit")
+        settings.className = "d-block";
     }
     render() {
         return (
@@ -33,8 +35,8 @@ export default class Activity extends Component {
                         <p className="">{this.props.activityPacket}</p>
                         <h5 className="card-title">{this.props.activityClass}</h5>
                         <p className="card-text">{this.props.text}</p>
-                        <button className="btn btn-secondary" data-toggle="modal" data-target="#activityEdit">Edit</button>
-                        <ActivityEdit modalId="activityEdit" fences={this.state.fences} snapshots={this.state.snapshots} />
+                        <button className="btn btn-secondary" id={this.props.id} onClick={this._callActivityEdit}>Edit</button>
+                        <ActivityEdit modalId="activityEdit" id={`${this.props.id}-activity-edit`} fences={this.state.fences} snapshots={this.state.snapshots} />
                     </div>
                 </div>
             </div>

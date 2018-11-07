@@ -3,7 +3,7 @@ import './App.css';
 import FenceAttribute from './FenceAttibute';
 import MethodForm from './form/MethodForm';
 
-export default class ActivityEdit extends Component {
+export default class FenceForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
