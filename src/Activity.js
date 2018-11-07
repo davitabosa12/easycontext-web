@@ -16,7 +16,14 @@ export default class Activity extends Component {
     }
     _callActivityEdit(ev){
         var settings = document.getElementById(this.props.id+"-activity-edit")
-        settings.className = "d-block";
+        //settings.className = "d-block";
+        var classTags = settings.className.split(" ");
+        classTags = classTags.map((tag) =>{
+            if(tag === "d-none"){
+                tag = "d-block";
+            }
+        });
+        settings.className = classTags.join(" ");
     }
     render() {
         return (
