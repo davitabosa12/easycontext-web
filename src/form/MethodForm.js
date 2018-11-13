@@ -79,6 +79,12 @@ export default class MethodForm extends Component {
                     </select>
                 </div>
             );
+        } else if (t === "6"){ //and fence
+
+        } else if (t === "7"){ //or fence
+
+        } else if (t === "8") { // not fence
+
         }
     }
 }
