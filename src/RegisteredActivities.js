@@ -23,6 +23,8 @@ export default class RegisteredActivities extends Component {
         this.setState((state, props) => ({
             activitiesList: [...state.activitiesList, activity]
         }));
+
+        this.props.onActivityAdded(activity);
     }
     _renderActivity(activity){
         let text = "Using ";

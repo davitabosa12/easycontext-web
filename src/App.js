@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, Switch } from 'react-router';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import createBrowserHistory from "history/createBrowserHistory";
 import logo from './logo.svg';
 import Navbar from './Navbar'
@@ -9,16 +9,56 @@ import './App.css';
 import Root from './Root';
 import ActivityEdit from './ActivityEdit';
 import Activity from './Activity';
+import FenceForm from './FenceForm';
 
 const history = createBrowserHistory();
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      activities: new Array()
+    }
+    this._onActivityAdded = this._onActivityAdded.bind(this);
+    this._onActivityEdited = this._onActivityEdited.bind(this);
+    this._onActivityRemoved = this._onActivityRemoved.bind(this);
+  }
+
+  _onActivityAdded(activity){
+      this.setState({
+        activities: [...this.state.activities, activity]
+      }, () => {
+        console.log(this.state);
+      });
+      
+  }
+  _onActivityRemoved(activity){
+    const indexToRemove = this.state.activities.findIndex((value, index, array) =>{
+      return value.activityName === activity.activityName;
+    });
+    if(indexToRemove < 0){
+      throw new Error("Tried to remove a not existing activity!");
+    }
+    this.setState({
+      activities: this.state.activities.splice(indexToRemove,1)
+    })
+  }
+  _onActivityEdited(){
+
+  }
+
   render() {
     return (
       <Root>
         <Router history={history}>
           <Switch>
-            <Route path={"/"} component={RegisteredActivities} />
-            <Route path={"/teste"} component={Activity} />
+            <Route 
+            exact path={"/"} 
+            render={props => <RegisteredActivities {...props} 
+            onActivityAdded={this._onActivityAdded}
+            onActivityEdited={this._onActivityEdited}
+            onActivityRemoved={this._onActivityRemoved} />}/>
+            <Route path={"/editFence"}
+            render={props => <Activity activityClass="A name" />} />
           </Switch>
 
         </Router>
