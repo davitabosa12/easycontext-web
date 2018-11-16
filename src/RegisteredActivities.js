@@ -70,7 +70,7 @@ export default class RegisteredActivities extends Component {
             <Activity key ={`${activity.packet}.${activity.class}`} 
             id={`${activity.packet}.${activity.class}`} 
             activityPacket={activity.packet} 
-            activityClass={activity.class} 
+            activityClass={activity.name} 
             fences={activity.fences}
             snapshots={activity.snapshots}
             text={text} 

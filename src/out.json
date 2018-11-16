@@ -1,0 +1,42 @@
+{
+    "activities": [
+        {
+            "name": "asd",
+            "packet": "asd",
+            "fences": [
+                {
+                    "fenceType": "1",
+                    "fenceName": "qwrr",
+                    "fenceAction": "eee",
+                    "fenceMethod": "Headphone.DURING"
+                },
+                {
+                    "fenceType": "1",
+                    "fenceName": "qwrr",
+                    "fenceAction": "eee",
+                    "fenceMethod": "Headphone.DURING"
+                }
+            ],
+            "snapshots": []
+        },
+        {
+            "name": "457",
+            "packet": "457",
+            "fences": [
+                {
+                    "fenceType": "1",
+                    "fenceName": "asdasd",
+                    "fenceAction": "rrrasdasdasdasdasdasd",
+                    "fenceMethod": "Headphone.DURING"
+                },
+                {
+                    "fenceType": "1",
+                    "fenceName": "rrr",
+                    "fenceAction": "rrr",
+                    "fenceMethod": "Headphone.DURING"
+                }
+            ],
+            "snapshots": []
+        }
+    ]
+}

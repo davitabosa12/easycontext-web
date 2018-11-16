@@ -11,10 +11,10 @@ export default class AddActivity extends Component {
     }
     _handleNewActivity(activity){
         let resp = {
-            class: activity.class.value,
+            name: activity.name.value,
             packet: activity.packet.value
         }
-        console.log(`From AddActivity: ${activity.packet.value}.${activity.class.value}`);
+        console.log(`From AddActivity: ${activity.packet.value}.${activity.name.value}`);
         this.props.onNewActivity(resp);
     }
     render(){

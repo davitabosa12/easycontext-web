@@ -15,7 +15,7 @@ export default class AddActivityModal extends Component {
     _newActivity() {
         var activityPacket = document.getElementsByName("activityPacket")[0];
         var activityClass = document.getElementsByName("activityClass")[0];
-        this.props.onNewActivity({ packet: activityPacket, class: activityClass });
+        this.props.onNewActivity({ packet: activityPacket, name: activityClass });
 
     }
     render() {

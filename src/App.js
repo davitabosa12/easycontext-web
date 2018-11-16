@@ -48,11 +48,17 @@ class App extends Component {
     })
   }
   _onActivityEdited(activity){
+    var activityDebug = activity;
+
+    var findEqualName = function(value){
+      
+      return value.name === activity.name && value.packet === activity.packet; 
+    }
+
+
     console.log("From app: OnActivityEdited: " + activity);
     var list = this.state.activities;
-    const indexToEdit = this.state.activities.findIndex((value, index, array) =>{
-      return value.activityName === activity.activityName;
-    });
+    const indexToEdit = this.state.activities.findIndex(findEqualName);
     if(indexToEdit < 0){
       list.splice(list.length -1, 0, activity);
     } else {
@@ -101,5 +107,6 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;
