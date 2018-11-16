@@ -6,8 +6,10 @@ export default class MethodForm extends Component {
         this.fenceType = this.props.type;
         this.state ={
             fenceType: "1",
+            fenceMethod: "Headphone.DURING",
         }
-        this._onChange = this.props.onChange;
+        //this._onChange = this.props.onChange;
+        this._onChange = this._onChange.bind(this);
 
     }
     
@@ -18,10 +20,17 @@ export default class MethodForm extends Component {
         if(prevState.fenceType !== this.props.type){
             this.setState({
                 fenceType: this.props.type,
+            }, () => {
+                this._onChange();
             })
         }
         
     }
+    _onChange(){
+        alert('Intercepting...');
+        this.props.onChange();
+    }
+   
 
     render() {
         var t = this.state.fenceType;
@@ -39,8 +48,8 @@ export default class MethodForm extends Component {
         } else if (t === "2") { //activity detection
             return (
                 <div className="form-group">
-                    <label htmlFor="fenceType" onChange={this._onChange} className="col-form-label text-secondary">Fence Method</label>
-                    <select className="form-control" name="fenceMethod" id="fenceMethod">
+                    <label htmlFor="fenceType"  className="col-form-label text-secondary">Fence Method</label>
+                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id="fenceMethod">
                         <option value="ActivityDetection.DURING">During</option>
                         <option value="ActivityDetection.STARTING">Starting</option>
                         <option value="ActivityDetection.STOPPING">Stopping</option>
@@ -50,8 +59,8 @@ export default class MethodForm extends Component {
         } else if (t === "3") { //beacon
             return (
                 <div className="form-group">
-                    <label htmlFor="fenceType" onChange={this._onChange} className="col-form-label text-secondary">Fence Method</label>
-                    <select className="form-control" name="fenceMethod" id="fenceMethod">
+                    <label htmlFor="fenceType"  className="col-form-label text-secondary">Fence Method</label>
+                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id="fenceMethod">
                         <option disabled value="Beacons.UNSUPPORTED">Beacons are not supported yet.</option>
                     </select>
                 </div>
@@ -59,8 +68,8 @@ export default class MethodForm extends Component {
         } else if (t === "4") { //location
             return (
                 <div className="form-group">
-                    <label htmlFor="fenceType" onChange={this._onChange} className="col-form-label text-secondary">Fence Method</label>
-                    <select className="form-control" name="fenceMethod" id="fenceMethod">
+                    <label htmlFor="fenceType"  className="col-form-label text-secondary">Fence Method</label>
+                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id="fenceMethod">
                         <option value="Location.ENTERING">Entering</option>
                         <option value="Location.EXITING">Exiting</option>
                         <option value="Location.IN">In</option>
