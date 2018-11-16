@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import RegisteredFences from './RegisteredFences'
+import RegisteredSnapshots from './RegisteredSnapshots'
 
 export default class ActivityView extends Component {
 
@@ -23,8 +25,8 @@ export default class ActivityView extends Component {
         console.log(`From ActivityView ${this.props}`);
         return (
             <div className="container">
-                <RegisteredFences />
-                <RegisteredSnapshots />
+                <RegisteredFences fences={this.currentActivity.fences}/>
+                <RegisteredSnapshots snapshots={this.currentActivity.snapshots}/>
 
             </div>
         )
