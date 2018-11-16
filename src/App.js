@@ -24,7 +24,7 @@ class App extends Component {
     this.setState({
       currentActivity: activity
     }, () => {
-      console.log("Selected activity: " + activity);
+      console.log("Selected activity: " + activity.name);
     })
   }
   _onActivityAdded(activity){
@@ -46,11 +46,29 @@ class App extends Component {
       activities: this.state.activities.splice(indexToRemove,1)
     })
   }
-  _onActivityEdited(){
+  _onActivityEdited(activity){
+    console.log("From app: OnActivityEdited: " + activity);
+    var list = this.state.activities;
+    const indexToEdit = this.state.activities.findIndex((value, index, array) =>{
+      return value.activityName === activity.activityName;
+    });
+    if(indexToEdit < 0){
+      list.splice(list.length -1, 0, activity);
+    } else {
+      list.splice(indexToEdit, 1, activity);
+    }
+    this.setState({
+      activities: list,
+    }, () =>{
+      console.log("Activity edited! " + activity);
+    })
 
+    
+    
   }
 
   render() {
+    console.log(this.state.activities);
     return (
       <Root>
         <Router history={history}>
@@ -65,7 +83,10 @@ class App extends Component {
             onActivitySelected = {this._onActivitySelected}/>}
             />
             <Route path={"/editFence"}
-            render={props => <ActivityView {...props} currentActivity= {this.state.currentActivity} />} />
+            render={props => <ActivityView {...props} 
+            currentActivity= {this.state.currentActivity}
+            onActivityEdited={this._onActivityEdited} />} 
+            />
           </Switch>
 
         </Router>

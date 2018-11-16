@@ -9,8 +9,8 @@ export default class Activity extends Component {
         this.state = {
             name: this.props.activityClass,
             packet: this.props.activityPacket,
-            fences: new Array(),
-            snapshots: new Array(),
+            fences: this.props.fences || new Array(),
+            snapshots: this.props.snapshots || new Array(),
         };
         this._callActivityEdit = this._callActivityEdit.bind(this);
         this._onActivitySelected = props.onActivitySelected;

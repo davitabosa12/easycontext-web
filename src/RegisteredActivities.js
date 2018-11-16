@@ -34,8 +34,8 @@ export default class RegisteredActivities extends Component {
     }
     _renderActivity(activity){
         let text = "Using ";
-        let fenceNumber = Math.floor(Math.random() * 10);
-        let snapshotNumber = Math.floor(Math.random() * 10);
+        let fenceNumber =0
+        let snapshotNumber = 0;
          try{
             fenceNumber = activity.fences.length || 0;
         } catch(err) {}
@@ -71,6 +71,8 @@ export default class RegisteredActivities extends Component {
             id={`${activity.packet}.${activity.class}`} 
             activityPacket={activity.packet} 
             activityClass={activity.class} 
+            fences={activity.fences}
+            snapshots={activity.snapshots}
             text={text} 
             onActivitySelected={this._onActivitySelected}/>
         )

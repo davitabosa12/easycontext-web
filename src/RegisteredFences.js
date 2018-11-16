@@ -47,11 +47,17 @@ export default class RegisteredFences extends Component {
     addFence(fence){
         this.setState({
             fencesList: [fence, ...this.state.fencesList]
-        })
+        }, () =>{
+            this._onFenceListUpdate(this.state.fencesList);
+        });
     }
     reject(){
         //TODO: Tell user that fence already exists
         console.log("Fence already exists!");
+    }
+
+    _onFenceListUpdate(fenceList){
+        this.props.onFenceListUpdate(fenceList);
     }
 
     render(){
