@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import './App.css';
 import FenceAttribute from './FenceAttibute';
 import FenceForm from './FenceForm'
+import { Link } from 'react-router-dom'
 
 export default class ActivityEdit extends Component {
     constructor(props) {
@@ -62,8 +63,7 @@ export default class ActivityEdit extends Component {
             <div id={this.props.id} className={display}>
                 {this._renderFencesList(this.state.fencesList)}
                 {this._renderSnapshotsList(this.state.snapshotList)}
-                <button className="btn btn-block btn-secondary" data-toggle="modal" data-target="#addRule">Add Rule</button>
-                <FenceForm modalId="addRule" />
+                
             </div>
 
         )

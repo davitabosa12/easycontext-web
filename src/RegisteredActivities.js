@@ -10,6 +10,8 @@ export default class RegisteredActivities extends Component {
             activitiesList: [{packet:"lopl", class:"teste"}]
         };
         this._handleOnNewActivity = this._handleOnNewActivity.bind(this);
+        this._renderActivity = this._renderActivity.bind(this);
+        this._onActivitySelected = this.props.onActivitySelected;
 
     }
     
@@ -42,8 +44,9 @@ export default class RegisteredActivities extends Component {
             if(fenceNumber > 0){
                 text = text + `${fenceNumber} Fence`;
                 if(fenceNumber > 1){
-                    text += 's ';
+                    text += 's';
                 }
+                text += " ";
             }
             if(snapshotNumber > 0){
                 if(fenceNumber > 0){
@@ -60,7 +63,12 @@ export default class RegisteredActivities extends Component {
         
         
         return (
-            <Activity key ={`${activity.packet}.${activity.class}`} id={`${activity.packet}.${activity.class}`} activityPacket={activity.packet} activityClass={activity.class} text={text}/>
+            <Activity key ={`${activity.packet}.${activity.class}`} 
+            id={`${activity.packet}.${activity.class}`} 
+            activityPacket={activity.packet} 
+            activityClass={activity.class} 
+            text={text} 
+            onActivitySelected={this._onActivitySelected}/>
         )
     }
     _renderActivitiesList(activitiesList){

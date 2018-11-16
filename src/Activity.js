@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import ActivityEdit from './ActivityEdit';
+import {Link} from 'react-router-dom';
 
 
 export default class Activity extends Component {
@@ -13,17 +13,16 @@ export default class Activity extends Component {
             snapshots: [],
         };
         this._callActivityEdit = this._callActivityEdit.bind(this);
+        this._onActivitySelected = props.onActivitySelected;
     }
     _callActivityEdit(ev){
-        var settings = document.getElementById(this.props.id+"-activity-edit")
-        //settings.className = "d-block";
-        var classTags = settings.className.split(" ");
-        classTags = classTags.map((tag) =>{
-            if(tag === "d-none"){
-                tag = "d-block";
-            }
-        });
-        settings.className = classTags.join(" ");
+        var selectedActivity = {
+            name: this.state.name,
+            packet: this.state.packet,
+            fences: this.state.fences,
+            snapshots: this.state.snapshots,
+        }
+        this._onActivitySelected(selectedActivity);
     }
     render() {
         return (
@@ -42,8 +41,9 @@ export default class Activity extends Component {
                         <p className="">{this.props.activityPacket}</p>
                         <h5 className="card-title">{this.props.activityClass}</h5>
                         <p className="card-text">{this.props.text}</p>
-                        <button className="btn btn-secondary" id={this.props.id} onClick={this._callActivityEdit}>Edit</button>
-                        <ActivityEdit modalId="activityEdit" id={`${this.props.id}-activity-edit`} fences={this.state.fences} snapshots={this.state.snapshots} />
+                        <Link to="/editFence" className="btn btn-block btn-secondary" onClick={this._callActivityEdit}>Edit</Link>
+                        <a href="#" className="btn btn-block btn-secondary" onClick={this._callActivityEdit}>Edit</a>
+                        
                     </div>
                 </div>
             </div>

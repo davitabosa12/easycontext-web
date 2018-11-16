@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import createBrowserHistory from "history/createBrowserHistory";
-import logo from './logo.svg';
-import Navbar from './Navbar'
-import Mockup from './Mockup'
+
 import RegisteredActivities from './RegisteredActivities'
 import './App.css';
 import Root from './Root';
-import ActivityEdit from './ActivityEdit';
-import Activity from './Activity';
-import FenceForm from './FenceForm';
+import ActivityView from './ActivityView';
 
 const history = createBrowserHistory();
 class App extends Component {
@@ -21,8 +17,16 @@ class App extends Component {
     this._onActivityAdded = this._onActivityAdded.bind(this);
     this._onActivityEdited = this._onActivityEdited.bind(this);
     this._onActivityRemoved = this._onActivityRemoved.bind(this);
+    this._onActivitySelected = this._onActivitySelected.bind(this);
   }
 
+  _onActivitySelected(activity){
+    this.setState({
+      currentActivity: activity
+    }, () => {
+      console.log("Selected activity: " + activity);
+    })
+  }
   _onActivityAdded(activity){
       this.setState({
         activities: [...this.state.activities, activity]
@@ -56,9 +60,11 @@ class App extends Component {
             render={props => <RegisteredActivities {...props} 
             onActivityAdded={this._onActivityAdded}
             onActivityEdited={this._onActivityEdited}
-            onActivityRemoved={this._onActivityRemoved} />}/>
+            onActivityRemoved={this._onActivityRemoved}
+            onActivitySelected = {this._onActivitySelected}/>}
+            />
             <Route path={"/editFence"}
-            render={props => <Activity activityClass="A name" />} />
+            render={props => <ActivityView {...props} currentActivity= {this.state.currentActivity} />} />
           </Switch>
 
         </Router>
