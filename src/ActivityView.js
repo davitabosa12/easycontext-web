@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import RegisteredFences from './RegisteredFences'
 import RegisteredSnapshots from './RegisteredSnapshots'
+import ReturnButton from './components/ReturnButton'
 
 export default class ActivityView extends Component {
 
     constructor(props) {
         super(props);
         this.currentActivity = this.props.currentActivity;
+        this.state = {
+            currentActivity: this.props.currentActivity,
+        }
         
     }
 
@@ -22,9 +26,12 @@ export default class ActivityView extends Component {
 
 
     render() {
+
         console.log(`From ActivityView ${this.props}`);
         return (
-            <div className="container">
+            <div>
+                <ReturnButton to="/" />
+            <h1>Editing {this.state.currentActivity.name}</h1>
                 <RegisteredFences fences={this.currentActivity.fences}/>
                 <RegisteredSnapshots snapshots={this.currentActivity.snapshots}/>
 

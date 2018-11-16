@@ -7,7 +7,7 @@ export default class RegisteredActivities extends Component {
     constructor(props){
         super(props);
         this.state = {
-            activitiesList: [{packet:"lopl", class:"teste"}]
+            activitiesList: props.activities
         };
         this._handleOnNewActivity = this._handleOnNewActivity.bind(this);
         this._renderActivity = this._renderActivity.bind(this);
@@ -15,8 +15,12 @@ export default class RegisteredActivities extends Component {
 
     }
     
-    componentDidMount(){
-       
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.activitiesList !== this.props.activities){
+            this.setState({
+                activitiesList: this.props.activities
+            });
+        }
     }
     /**
      * Adiciona a nova activity na lista dentro do props.

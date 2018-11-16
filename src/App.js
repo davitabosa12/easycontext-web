@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import createBrowserHistory from "history/createBrowserHistory";
 
 import RegisteredActivities from './RegisteredActivities'
@@ -58,6 +58,7 @@ class App extends Component {
             <Route 
             exact path={"/"} 
             render={props => <RegisteredActivities {...props} 
+            activities = {this.state.activities}
             onActivityAdded={this._onActivityAdded}
             onActivityEdited={this._onActivityEdited}
             onActivityRemoved={this._onActivityRemoved}

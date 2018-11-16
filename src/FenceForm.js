@@ -11,6 +11,7 @@ export default class FenceForm extends Component {
         };
 
         this._formChange = this._formChange.bind(this);
+        this._handleSave = this._handleSave.bind(this);
 
     }
 
@@ -29,15 +30,15 @@ export default class FenceForm extends Component {
         })
     }
 
+    _handleSave(){
+        this.props.onSave(this.state);
+    }
+
 
     render() {
         return (
             <div>
-                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#id">
-                        Add a new Fence
-                    </button>
-
-                <div className="modal fade bd-example-modal-lg" id="id" tabindex="-1" role="document" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div className="modal fade bd-example-modal-lg" id={this.props.modalId  } tabindex="-1" role="document" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-lg">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -73,10 +74,15 @@ export default class FenceForm extends Component {
                                     </div>
                                 </form>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onClick={this._handleSave}>Save changes</button>
+                            </div>
                         </div>
 
                     </div>
                 </div>
+
             </div>
         )
     }
