@@ -41,9 +41,7 @@ export default class Activity extends Component {
                         <p className="">{this.props.activityPacket}</p>
                         <h5 className="card-title">{this.props.activityClass}</h5>
                         <p className="card-text">{this.props.text}</p>
-                        <Link to="/editFence" className="btn btn-block btn-secondary" onClick={this._callActivityEdit}>Edit</Link>
-                        <a href="#" className="btn btn-block btn-secondary" onClick={this._callActivityEdit}>Edit</a>
-                        
+                        <Link to="/editFence" className="btn btn-block btn-secondary" onClick={this._callActivityEdit}>Edit</Link>                                                
                     </div>
                 </div>
             </div>

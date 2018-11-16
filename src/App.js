@@ -18,6 +18,7 @@ class App extends Component {
     this._onActivityEdited = this._onActivityEdited.bind(this);
     this._onActivityRemoved = this._onActivityRemoved.bind(this);
     this._onActivitySelected = this._onActivitySelected.bind(this);
+    this._handleExport = this._handleExport.bind(this);
   }
 
   _onActivitySelected(activity){
@@ -66,11 +67,17 @@ class App extends Component {
     
     
   }
+  _handleExport(){
+    var exp = {
+      activities: this.state.activities,
+    };
+    console.log(JSON.stringify(exp));
+}
 
   render() {
     console.log(this.state.activities);
     return (
-      <Root>
+      <Root onExport={this._handleExport}>
         <Router history={history}>
           <Switch>
             <Route 

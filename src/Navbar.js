@@ -3,6 +3,14 @@ import './App.css';
 
 
 export default class Navbar extends Component {
+    constructor(props){
+        super(props);
+        this._handleExport = this._handleExport.bind(this);
+    }
+
+    _handleExport(){
+        this.props.onExport();
+    }
     render() {
         return(
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -13,7 +21,7 @@ export default class Navbar extends Component {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 
-                    <button className="btn btn-outline-success ml-auto" type="submit">Export Configuration</button>
+                    <button className="btn btn-outline-success ml-auto" type="submit" onClick={this._handleExport}>Export Configuration</button>
                 </div>
             </nav>
         )
