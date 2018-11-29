@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-
+import { Redirect } from 'react-router-dom';
 import SnapshotComponent from './components/SnapshotComponent'
 
 export default class RegisteredSnapshots extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.snapshots = this.props.snapshots;
 
@@ -11,18 +11,20 @@ export default class RegisteredSnapshots extends Component {
             snapshotList: this.snapshots
         }
     }
-    _renderSnapshotsList(snapshots){
+    _renderSnapshotsList(snapshots) {
+        if (snapshots === undefined)
+            return (<Redirect to="/" />)
         return snapshots.map(this._renderSnapshot)
     }
-    _renderSnapshot(snapshot){
+    _renderSnapshot(snapshot) {
         return (
             <SnapshotComponent snapshotName={snapshot.snapshotName} />
         )
 
     }
-    render(){
-        
-        return(
+    render() {
+
+        return (
             <div className="container">
                 <div className="row">
                     {this._renderSnapshotsList(this.state.snapshotList)}

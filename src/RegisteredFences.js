@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FenceForm from './FenceForm'
+import {Redirect} from 'react-router-dom';
 import './App.css';
 import FenceComponent from './components/FenceComponent'
 import AddFence from './components/AddFence';
@@ -13,7 +13,9 @@ export default class RegisteredFences extends Component {
         this._handleNewFence = this._handleNewFence.bind(this);
     }
     _renderFencesList(fences){
-        return fences.map(this._renderFence)
+        if(fences === undefined)
+            return (<Redirect to="/" />)
+        return fences.map(this._renderFence);
     }
     _renderFence(fence){
         return (

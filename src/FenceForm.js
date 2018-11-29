@@ -30,7 +30,7 @@ export default class FenceForm extends Component {
         })
     }
 
-    _handleSave(){
+    _handleSave() {
         this.props.onSave(this.state);
     }
 
@@ -38,7 +38,7 @@ export default class FenceForm extends Component {
     render() {
         return (
             <div>
-                <div className="modal fade bd-example-modal-lg" id={this.props.modalId  } tabindex="-1" role="document" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div className="modal fade bd-example-modal-lg" id={this.props.modalId} tabindex="-1" role="document" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-lg">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -65,6 +65,7 @@ export default class FenceForm extends Component {
                                             <option value="3">Beacon</option>
                                             <option value="4">Location</option>
                                             <option value="5">Time</option>
+                                            <option value="6">Aggregate Rule</option>
                                         </select>
                                     </div>
                                     <MethodForm onChange={this._formChange} type={this.state.fenceType} ></MethodForm>

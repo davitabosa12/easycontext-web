@@ -27,7 +27,7 @@ export default class MethodForm extends Component {
         
     }
     _onChange(){
-        alert('Intercepting...');
+        
         this.props.onChange();
     }
    
@@ -79,8 +79,8 @@ export default class MethodForm extends Component {
         } else if (t === "5") { //time
             return (
                 <div className="form-group">
-                    <label htmlFor="fenceType" onChange={this._onChange} className="col-form-label text-secondary">Fence Method</label>
-                    <select className="form-control" name="fenceMethod" id="fenceMethod">
+                    <label htmlFor="fenceType" className="col-form-label text-secondary">Fence Method</label>
+                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id="fenceMethod">
                         <option value="Time.AROUND_TIME_INSTANT">Around Time Instant</option>
                         <option value="Time.IN_DAILY_INTERVAL">In Daily Interval</option>
                         <option value="Time.IN_INTERVAL">In Interval</option>
@@ -88,12 +88,17 @@ export default class MethodForm extends Component {
                     </select>
                 </div>
             );
-        } else if (t === "6"){ //and fence
-
-        } else if (t === "7"){ //or fence
-
-        } else if (t === "8") { // not fence
-
+        } else if (t === "6"){ //aggregate rule
+            return(
+                <div className="form-group">
+                    <label htmlFor="fenceType"  className="col-form-label text-secondary">Fence Method</label>
+                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id="fenceMethod">
+                        <option value="Aggregate.AND">AND</option>
+                        <option value="Aggregate.OR">OR</option>
+                        
+                    </select>
+                </div>
+            )
         }
     }
 }
