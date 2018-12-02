@@ -11,6 +11,8 @@ export default class MethodForm extends Component {
         //this._onChange = this.props.onChange;
         this._onChange = this._onChange.bind(this);
 
+        this.id = this.props.id;
+
     }
     
     
@@ -38,7 +40,7 @@ export default class MethodForm extends Component {
             return (
                 <div className="form-group">
                     <label htmlFor="fenceType" className="col-form-label text-secondary">Fence Method</label>
-                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id="fenceMethod">
+                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id={this.id + "fenceMethod"}>
                         <option value="Headphone.DURING">During</option>
                         <option value="Headphone.PLUGGING_IN">Plugging In</option>
                         <option value="Headphone.UNPLUGGING">Unplugging</option>
@@ -49,7 +51,7 @@ export default class MethodForm extends Component {
             return (
                 <div className="form-group">
                     <label htmlFor="fenceType"  className="col-form-label text-secondary">Fence Method</label>
-                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id="fenceMethod">
+                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id={this.id + "fenceMethod"}>
                         <option value="ActivityDetection.DURING">During</option>
                         <option value="ActivityDetection.STARTING">Starting</option>
                         <option value="ActivityDetection.STOPPING">Stopping</option>
@@ -60,7 +62,7 @@ export default class MethodForm extends Component {
             return (
                 <div className="form-group">
                     <label htmlFor="fenceType"  className="col-form-label text-secondary">Fence Method</label>
-                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id="fenceMethod">
+                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id={this.id + "fenceMethod"}>
                         <option disabled value="Beacons.UNSUPPORTED">Beacons are not supported yet.</option>
                     </select>
                 </div>
@@ -69,7 +71,7 @@ export default class MethodForm extends Component {
             return (
                 <div className="form-group">
                     <label htmlFor="fenceType"  className="col-form-label text-secondary">Fence Method</label>
-                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id="fenceMethod">
+                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id={this.id + "fenceMethod"}>
                         <option value="Location.ENTERING">Entering</option>
                         <option value="Location.EXITING">Exiting</option>
                         <option value="Location.IN">In</option>
@@ -80,11 +82,12 @@ export default class MethodForm extends Component {
             return (
                 <div className="form-group">
                     <label htmlFor="fenceType" className="col-form-label text-secondary">Fence Method</label>
-                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id="fenceMethod">
+                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id={this.id + "fenceMethod"}>
                         <option value="Time.AROUND_TIME_INSTANT">Around Time Instant</option>
                         <option value="Time.IN_DAILY_INTERVAL">In Daily Interval</option>
                         <option value="Time.IN_INTERVAL">In Interval</option>
                         <option value="Time.IN_TIME_INTERVAL">In Time Interval</option>
+                        <option value="Time.IN_INTERVAL_OF_DAY">In Interval of Day</option>
                     </select>
                 </div>
             );
@@ -92,7 +95,7 @@ export default class MethodForm extends Component {
             return(
                 <div className="form-group">
                     <label htmlFor="fenceType"  className="col-form-label text-secondary">Fence Method</label>
-                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id="fenceMethod">
+                    <select className="form-control" onChange={this._onChange} name="fenceMethod" id={this.id + "fenceMethod"}>
                         <option value="Aggregate.AND">AND</option>
                         <option value="Aggregate.OR">OR</option>
                         

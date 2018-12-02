@@ -3,23 +3,23 @@ import FenceForm from '../FenceForm';
 
 
 export default class AddFence extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this._handleNewFence = this._handleNewFence.bind(this);
-        console.log("AddFence: props->>" + this.props.onNewFence );
+        console.log("AddFence: props->>" + this.props.onNewFence);
     }
-    _handleNewFence(activity){
+    _handleNewFence(activity) {
         console.log(`From AddFence: ${activity.packet.value}.${activity.class.value}`);
         this.props.onNewActivity(activity);
     }
-    _handleNewFence(fence){
+    _handleNewFence(fence) {
         console.log(`From AddFence: ${fence.fenceName}`);
         this.props.onNewFence(fence);
     }
-    render(){
-        return(
+    render() {
+        return (
             <div className="col-sm-4">
-                <div className="card text-white bg-secondary mb-3" style={{"maxWidth": "18rem"}}>
+                <div className="card text-white bg-secondary mb-3" style={{ "maxWidth": "18rem" }}>
                     <div className="card-header">Add a new Fence</div>
                     <div className="card-body">
                         <h5 className="card-title"></h5>
@@ -27,7 +27,13 @@ export default class AddFence extends Component {
                         <button className="btn btn-block btn-secondary" data-toggle="modal" data-target="#addFence"><i className="material-icons align-middle">add</i></button>
                     </div>
                 </div>
-            <FenceForm onSave={this._handleNewFence} modalId="addFence"/>
+                <div className="modal fade bd-example-modal-lg" id="addFence" tabindex="-1" role="document" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-lg">
+                        <FenceForm onSave={this._handleNewFence} />
+                    </div>
+
+                </div>
+
             </div>
         )
     }

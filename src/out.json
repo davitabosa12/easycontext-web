@@ -1,39 +1,68 @@
 {
     "activities": [
         {
-            "name": "asd",
-            "packet": "asd",
+            "name": "asf",
+            "packet": "asf",
             "fences": [
                 {
-                    "fenceType": "1",
-                    "fenceName": "qwrr",
-                    "fenceAction": "eee",
-                    "fenceMethod": "Headphone.DURING"
+                    "fenceType": "6",
+                    "fenceName": "asf",
+                    "fenceAction": "asfasf",
+                    "fenceMethod": "Aggregate.AND",
+                    "params": {
+                        "and": [
+                            {
+                                "fenceType": "1",
+                                "fenceName": "asfg",
+                                "fenceAction": "asfa",
+                                "fenceMethod": "Headphone.DURING",
+                                "params": {
+                                    "headphoneState": "PLUGGED_IN"
+                                }
+                            },
+                            {
+                                "fenceType": "4",
+                                "fenceName": "",
+                                "fenceAction": "",
+                                "fenceMethod": "Location.ENTERING",
+                                "params": {
+                                    "latitude": "12124",
+                                    "longitude": "125125",
+                                    "radius": "500"
+                                }
+                            }
+                        ]
+                    }
                 },
                 {
-                    "fenceType": "1",
-                    "fenceName": "qwrr",
-                    "fenceAction": "eee",
-                    "fenceMethod": "Headphone.DURING"
-                }
-            ],
-            "snapshots": []
-        },
-        {
-            "name": "457",
-            "packet": "457",
-            "fences": [
-                {
-                    "fenceType": "1",
-                    "fenceName": "asdasd",
-                    "fenceAction": "rrrasdasdasdasdasdasd",
-                    "fenceMethod": "Headphone.DURING"
-                },
-                {
-                    "fenceType": "1",
-                    "fenceName": "rrr",
-                    "fenceAction": "rrr",
-                    "fenceMethod": "Headphone.DURING"
+                    "fenceType": "6",
+                    "fenceName": "asf",
+                    "fenceAction": "asfasf",
+                    "fenceMethod": "Aggregate.AND",
+                    "params": {
+                        "and": [
+                            {
+                                "fenceType": "1",
+                                "fenceName": "asfg",
+                                "fenceAction": "asfa",
+                                "fenceMethod": "Headphone.DURING",
+                                "params": {
+                                    "headphoneState": "PLUGGED_IN"
+                                }
+                            },
+                            {
+                                "fenceType": "4",
+                                "fenceName": "",
+                                "fenceAction": "",
+                                "fenceMethod": "Location.ENTERING",
+                                "params": {
+                                    "latitude": "12124",
+                                    "longitude": "125125",
+                                    "radius": "500"
+                                }
+                            }
+                        ]
+                    }
                 }
             ],
             "snapshots": []
