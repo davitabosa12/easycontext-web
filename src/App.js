@@ -9,7 +9,7 @@ import ActivityView from './ActivityView';
 
 const history = createBrowserHistory();
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       activities: new Array()
@@ -21,64 +21,76 @@ class App extends Component {
     this._handleExport = this._handleExport.bind(this);
   }
 
-  _onActivitySelected(activity){
+  _onActivitySelected(activity) {
     this.setState({
       currentActivity: activity
     }, () => {
       console.log("Selected activity: " + activity.name);
     })
   }
-  _onActivityAdded(activity){
-      this.setState({
-        activities: [...this.state.activities, activity]
-      }, () => {
-        console.log(this.state);
-      });
-      
+  _onActivityAdded(activity) {
+    this.setState({
+      activities: [...this.state.activities, activity]
+    }, () => {
+      console.log(this.state);
+    });
+
   }
-  _onActivityRemoved(activity){
-    const indexToRemove = this.state.activities.findIndex((value, index, array) =>{
+  _onActivityRemoved(activity) {
+    const indexToRemove = this.state.activities.findIndex((value, index, array) => {
       return value.activityName === activity.activityName;
     });
-    if(indexToRemove < 0){
+    if (indexToRemove < 0) {
       throw new Error("Tried to remove a not existing activity!");
     }
     this.setState({
-      activities: this.state.activities.splice(indexToRemove,1)
+      activities: this.state.activities.splice(indexToRemove, 1)
     })
   }
-  _onActivityEdited(activity){
+  _onActivityEdited(activity) {
     var activityDebug = activity;
 
-    var findEqualName = function(value){
-      
-      return value.name === activity.name && value.packet === activity.packet; 
+    var findEqualName = function (value) {
+
+      return value.name === activity.name && value.packet === activity.packet;
     }
 
 
     console.log("From app: OnActivityEdited: " + activity);
     var list = this.state.activities;
     const indexToEdit = this.state.activities.findIndex(findEqualName);
-    if(indexToEdit < 0){
-      list.splice(list.length -1, 0, activity);
+    if (indexToEdit < 0) {
+      list.splice(list.length - 1, 0, activity);
     } else {
       list.splice(indexToEdit, 1, activity);
     }
     this.setState({
       activities: list,
-    }, () =>{
+    }, () => {
       console.log("Activity edited! " + activity);
     })
 
-    
-    
+
+
   }
-  _handleExport(){
+  _handleExport() {
     var exp = {
       activities: this.state.activities,
     };
     console.log(JSON.stringify(exp));
-}
+    document.getElementById("btn_modal").click();
+  }
+
+  result() {
+    var exp = {
+      activities: this.state.activities,
+    };
+    return (
+      <pre>
+        {JSON.stringify(exp, null, 2)}
+      </pre>
+    )
+  }
 
   render() {
     console.log(this.state.activities);
@@ -86,23 +98,32 @@ class App extends Component {
       <Root onExport={this._handleExport}>
         <Router history={history}>
           <Switch>
-            <Route 
-            exact path={"/"} 
-            render={props => <RegisteredActivities {...props} 
-            activities = {this.state.activities}
-            onActivityAdded={this._onActivityAdded}
-            onActivityEdited={this._onActivityEdited}
-            onActivityRemoved={this._onActivityRemoved}
-            onActivitySelected = {this._onActivitySelected}/>}
+            <Route
+              exact path={"/"}
+              render={props => <RegisteredActivities {...props}
+                activities={this.state.activities}
+                onActivityAdded={this._onActivityAdded}
+                onActivityEdited={this._onActivityEdited}
+                onActivityRemoved={this._onActivityRemoved}
+                onActivitySelected={this._onActivitySelected} />}
             />
             <Route path={"/editFence"}
-            render={props => <ActivityView {...props} 
-            currentActivity= {this.state.currentActivity}
-            onActivityEdited={this._onActivityEdited} />} 
+              render={props => <ActivityView {...props}
+                currentActivity={this.state.currentActivity}
+                onActivityEdited={this._onActivityEdited} />}
             />
           </Switch>
 
         </Router>
+        <button type="button" style={{display: "none"}} id="btn_modal" class="btn btn-primary" data-toggle="modal" data-target="#resultado">Large modal</button>
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="resultado" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              {this.result()}
+            </div>
+          </div>
+        </div>
       </Root>
     );
   }
