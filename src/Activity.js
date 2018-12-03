@@ -13,6 +13,7 @@ export default class Activity extends Component {
             snapshots: this.props.snapshots || new Array(),
         };
         this._callActivityEdit = this._callActivityEdit.bind(this);
+        this._remove = this._remove.bind(this);
         this._onActivitySelected = props.onActivitySelected;
     }
     _callActivityEdit(ev){
@@ -24,6 +25,15 @@ export default class Activity extends Component {
         }
         this._onActivitySelected(selectedActivity);
     }
+    _remove(){
+        var selectedActivity = {
+            name: this.state.name,
+            packet: this.state.packet,
+            fences: this.state.fences,
+            snapshots: this.state.snapshots,
+        }
+        this.props.onActivityRemoved(selectedActivity);
+    }
     render() {
         return (
             <div className="col-sm-4">
@@ -32,7 +42,7 @@ export default class Activity extends Component {
                         <div className="row">
                             
                             <span className=" ml-auto pull-right">
-                                <button className="btn close"><i className="align-middle material-icons">close</i></button>
+                                <button className="btn close" onClick={this._remove}><i className="align-middle material-icons">close</i></button>
                             </span>                            
                         </div>
 

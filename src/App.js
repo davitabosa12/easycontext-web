@@ -6,6 +6,7 @@ import RegisteredActivities from './RegisteredActivities'
 import './App.css';
 import Root from './Root';
 import ActivityView from './ActivityView';
+import {selectText} from './Utils'
 
 const history = createBrowserHistory();
 class App extends Component {
@@ -37,6 +38,7 @@ class App extends Component {
 
   }
   _onActivityRemoved(activity) {
+    console.log("removing activity " + activity);
     const indexToRemove = this.state.activities.findIndex((value, index, array) => {
       return value.activityName === activity.activityName;
     });
@@ -81,14 +83,33 @@ class App extends Component {
     document.getElementById("btn_modal").click();
   }
 
+  
+  selectAndCopy() {
+    var elem = document.getElementById("output");
+    
+      const el = document.createElement('textarea');
+      el.value = elem.innerHTML;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    
+    
+    document.execCommand("copy");
+    alert("Copied");
+  }
+
   result() {
     var exp = {
       activities: this.state.activities,
     };
     return (
-      <pre>
-        {JSON.stringify(exp, null, 2)}
-      </pre>
+      <div id="selectTarget">
+        <pre style={{ textAlign: "left" }} id="output" onClick={this.selectAndCopy}>
+          {JSON.stringify(exp, null, 2)}
+        </pre>
+      </div>
+
     )
   }
 
@@ -115,7 +136,7 @@ class App extends Component {
           </Switch>
 
         </Router>
-        <button type="button" style={{display: "none"}} id="btn_modal" class="btn btn-primary" data-toggle="modal" data-target="#resultado">Large modal</button>
+        <button type="button" style={{ display: "none" }} id="btn_modal" class="btn btn-primary" data-toggle="modal" data-target="#resultado">Large modal</button>
 
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="resultado" aria-labelledby="myLargeModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
@@ -124,6 +145,8 @@ class App extends Component {
             </div>
           </div>
         </div>
+
+        <input type="textarea" style={{display: "none"}} id="hidden_textarea" />
       </Root>
     );
   }

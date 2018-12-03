@@ -9,9 +9,11 @@ export default class RegisteredActivities extends Component {
         this.state = {
             activitiesList: props.activities
         };
+        console.log(this.props);
         this._handleOnNewActivity = this._handleOnNewActivity.bind(this);
         this._renderActivity = this._renderActivity.bind(this);
         this._onActivitySelected = this.props.onActivitySelected;
+        this._onActivityRemoved = this._onActivityRemoved.bind(this);
 
     }
     
@@ -31,6 +33,9 @@ export default class RegisteredActivities extends Component {
         }));
 
         this.props.onActivityAdded(activity);
+    }
+    _onActivityRemoved(activity){
+        this.props.onActivityRemoved(activity);
     }
     _renderActivity(activity){
         let text = "Using ";
@@ -74,7 +79,8 @@ export default class RegisteredActivities extends Component {
             fences={activity.fences}
             snapshots={activity.snapshots}
             text={text} 
-            onActivitySelected={this._onActivitySelected}/>
+            onActivitySelected={this._onActivitySelected}
+            onActivityRemoved={this._onActivityRemoved}/>
         )
     }
     _renderActivitiesList(activitiesList){
