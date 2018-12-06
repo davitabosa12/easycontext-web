@@ -246,10 +246,7 @@ export default class FenceForm extends Component {
                                 </select>
                             </div>
                             <MethodForm id={this.methodFormId} onChange={this._formChange} type={this.state.fenceType} ></MethodForm>
-                            <div className="form-group">
-                                <label htmlFor="params" onChange={this._formChange} className="col-form-label text-secondary">Params</label>
-                                <input type="text" className="form-control" placeholder="???" id="params" name="params" />
-                            </div>
+                            
                             <MethodParams 
                             id = {this.methodParamsId}
                             onChange={this._formChange} 
