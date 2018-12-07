@@ -51,43 +51,43 @@ export default class MethodParams extends Component {
             <div>
                 <label htmlFor="activityTypes" className="col-form-label text-secondary">Activity Types</label>
                 <div class="form-check">
-                    <input class="form-check-input" onChange={this._onChange} name="activityTypes" type="checkbox" value="IN_VEHICLE" id={this.props.id +"activityTypes"} />
+                    <input class="form-check-input" onChange={this._onChange} name={this.props.id +"activityTypes"} type="checkbox" value="IN_VEHICLE" id={this.props.id +"activityTypes"} />
                     <label class="form-check-label" for="defaultCheck1">
                         In Vehicle
                             </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" onChange={this._onChange} name="activityTypes" type="checkbox" value="ON_BICYCLE" id={this.props.id +"activityTypes"}/>
+                    <input class="form-check-input" onChange={this._onChange} name={this.props.id +"activityTypes"} type="checkbox" value="ON_BICYCLE" id={this.props.id +"activityTypes"}/>
                     <label class="form-check-label" for="defaultCheck1">
                         On Bicycle
                             </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" onChange={this._onChange} name="activityTypes" type="checkbox" value="ON_FOOT" id={this.props.id +"activityTypes"} />
+                    <input class="form-check-input" onChange={this._onChange} name={this.props.id +"activityTypes"} type="checkbox" value="ON_FOOT" id={this.props.id +"activityTypes"} />
                     <label class="form-check-label" for="defaultCheck1">
                         On Foot
                             </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" onChange={this._onChange} name="activityTypes" type="checkbox" value="RUNNING" id={this.props.id +"activityTypes"} />
+                    <input class="form-check-input" onChange={this._onChange} name={this.props.id +"activityTypes"} type="checkbox" value="RUNNING" id={this.props.id +"activityTypes"} />
                     <label class="form-check-label" for="defaultCheck1">
                         Running
                             </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" onChange={this._onChange} name="activityTypes" type="checkbox" value="STILL" id={this.props.id +"activityTypes"} />
+                    <input class="form-check-input" onChange={this._onChange} name={this.props.id +"activityTypes"} type="checkbox" value="STILL" id={this.props.id +"activityTypes"} />
                     <label class="form-check-label" for="defaultCheck1">
                         Still
                             </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" onChange={this._onChange} name="activityTypes" type="checkbox" value="WALKING" id={this.props.id +"activityTypes"} />
+                    <input class="form-check-input" onChange={this._onChange} name={this.props.id +"activityTypes"} type="checkbox" value="WALKING" id={this.props.id +"activityTypes"} />
                     <label class="form-check-label" for="defaultCheck1">
                         Walking
                             </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" onChange={this._onChange} name="activityTypes" type="checkbox" value="UNKNOWN" id={this.props.id +"activityTypes"} />
+                    <input class="form-check-input" onChange={this._onChange} name={this.props.id +"activityTypes"} type="checkbox" value="UNKNOWN" id={this.props.id +"activityTypes"} />
                     <label class="form-check-label" for="activityTypes">
                         Unknown
                             </label>
