@@ -58,13 +58,13 @@
                 <HeadphoneCard />
               </div>
               <div v-else-if="item.title === 'Location'">
-                <HeadphoneCard />
+                <LocationCard />
               </div>
               <div v-else-if="item.title === 'Time'">
                 <HeadphoneCard />
               </div>
               <div v-else-if="item.title === 'Activity'">
-                <HeadphoneCard />
+                <ActivityCard />
               </div>
               <div v-else-if="item.title === 'Aggregate'">
                 <HeadphoneCard />
@@ -79,11 +79,13 @@
 
 <script>
 import HeadphoneCard from "../components/cards/HeadphoneCard";
+import ActivityCard from "../components/cards/ActivityCard";
+import LocationCard from "../components/cards/LocationCard";
 import UUID from "uuid/v1";
 
 export default {
   components: {
-    HeadphoneCard
+    HeadphoneCard, ActivityCard, LocationCard
   },
   data() {
     return {

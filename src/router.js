@@ -23,6 +23,11 @@ export default new Router({
       path: '/edit/:name',
       name: 'edit',
       component: () => import('./views/EditRule.vue')
+    },
+    {
+      path: '/map',
+      name: 'map',
+      component: () => import('./views/GoogleMapTest.vue')
     }
   ]
 })
