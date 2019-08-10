@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="250">
+  <v-card min-width="500px" min-height="500px">
     <div>
       <v-card-title>
         <span>Location</span>
@@ -8,38 +8,27 @@
       <div v-if="!isMini">
         <v-container>
           <v-layout wrap>
-            <v-flex>
-              <v-select :items="methods" v-model="selected" label="Method" @change="changeForms"></v-select>
+            <v-flex sm4>
+              <v-select :items="methods" v-model="selected" label="Method"></v-select>
+              <v-text-field label="Latitude" type="number" v-model="latitude" disabled></v-text-field>
+              <v-text-field label="Longitude" type="number" v-model="longitude" disabled></v-text-field>
+              <v-text-field label="Radius (meters)" type="number" min="0" v-model="radius" @change="radiusChange"></v-text-field>
+              <v-text-field
+                v-if="selected === 'LOCATION.IN'"
+                label="Dwell time (ms)"
+                type="number"
+                v-model="dwellTime"
+                min="0"
+              ></v-text-field>
             </v-flex>
             <v-flex>
-                <v-text-field
-                    label="Latitude"
-                    type="number"
-                ></v-text-field>
-                <v-text-field
-                    label="Longitude"
-                    type="number"
-                ></v-text-field>
-                <v-text-field
-                    label="Radius (meters)"
-                    type="number"
-                    min="0"
-                ></v-text-field>
-                <v-text-field
-                    v-if="selected === 'LOCATION.IN'"
-                    label="Dwell time (ms)"
-                    type="number"
-                    min="0"
-                ></v-text-field>
-            </v-flex>
-            <v-flex>
-<Map
-  :center="{lat:10, lng:10}"
-  :zoom="7"
-  map-type-id="terrain"
-  style="width: 500px; height: 300px"
->
-</Map>
+              <GoogleMap
+                apiKey="AIzaSyC0WCWP3cqhaoSIurtzxXA5Q1SFmTDqwnE"
+                :center="{lat: this.latitude, lng:this.longitude}"
+                :onClick="mapClick"
+                :markerPoint="{lat: Number(this.latitude), lng: Number(this.longitude)}"
+                :radius="Number(radius)"
+              />
             </v-flex>
           </v-layout>
         </v-container>
@@ -50,11 +39,11 @@
 
 <script>
 import LocationMethod from "../../model/enums/LocationMethod";
-import Map from 'vue2-google-maps';
+import GoogleMap from "../../components/GoogleMap";
 export default {
-    components:{
-        Map
-    },
+  components: {
+    GoogleMap
+  },
   data: () => {
     return {
       selected: undefined,
@@ -63,14 +52,25 @@ export default {
         { text: "Exiting", value: LocationMethod.EXITING },
         { text: "In", value: LocationMethod.IN }
       ],
-      isMini: false
+      latitude: -3.7448579,
+      longitude: -38.5787125,
+      radius:100,
+      dwellTime: 1000,
+      isMini: false,
+      currentMarker: null,
+      currentCircle: null,
     };
   },
   methods: {
     toggleMini() {
       this.$data.isMini = !this.$data.isMini;
     },
-    changeForms() {
+    mapClick(evt) {
+      this.latitude = evt.latLng.lat();
+      this.longitude = evt.latLng.lng();
+      
+    },
+    radiusChange(){
 
     }
   }
