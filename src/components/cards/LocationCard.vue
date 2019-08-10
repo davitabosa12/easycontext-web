@@ -8,20 +8,11 @@
       <div v-if="!isMini">
         <v-container>
           <v-layout wrap>
-            <v-flex sm4>
-              <v-select :items="methods" v-model="selected" label="Method"></v-select>
-              <v-text-field label="Latitude" type="number" v-model="latitude" disabled></v-text-field>
-              <v-text-field label="Longitude" type="number" v-model="longitude" disabled></v-text-field>
-              <v-text-field label="Radius (meters)" type="number" min="0" v-model="radius" @change="radiusChange"></v-text-field>
-              <v-text-field
-                v-if="selected === 'LOCATION.IN'"
-                label="Dwell time (ms)"
-                type="number"
-                v-model="dwellTime"
-                min="0"
-              ></v-text-field>
+            <v-flex justify-space-around align-center align-content-center="" v-if="!isMapShown">
+              <v-btn @click="showMap">Show map</v-btn>
             </v-flex>
-            <v-flex>
+            
+            <v-flex sm12 v-else>
               <GoogleMap
                 apiKey="AIzaSyC0WCWP3cqhaoSIurtzxXA5Q1SFmTDqwnE"
                 :center="{lat: this.latitude, lng:this.longitude}"
@@ -29,6 +20,20 @@
                 :markerPoint="{lat: Number(this.latitude), lng: Number(this.longitude)}"
                 :radius="Number(radius)"
               />
+              <v-btn @click="hideMap">Hide map</v-btn>
+            </v-flex>
+            <v-flex sm12>
+              <v-select :items="methods" v-model="selected" label="Method"></v-select>
+              <v-text-field label="Latitude" type="number" v-model="latitude" disabled></v-text-field>
+              <v-text-field label="Longitude" type="number" v-model="longitude" disabled></v-text-field>
+              <v-text-field label="Radius (meters)" type="number" min="0" v-model="radius"></v-text-field>
+              <v-text-field
+                v-if="selected === 'LOCATION.IN'"
+                label="Dwell time (ms)"
+                type="number"
+                v-model="dwellTime"
+                min="0"
+              ></v-text-field>
             </v-flex>
           </v-layout>
         </v-container>
@@ -46,7 +51,7 @@ export default {
   },
   data: () => {
     return {
-      selected: undefined,
+      selected: LocationMethod.ENTERING,
       methods: [
         { text: "Entering", value: LocationMethod.ENTERING },
         { text: "Exiting", value: LocationMethod.EXITING },
@@ -59,6 +64,7 @@ export default {
       isMini: false,
       currentMarker: null,
       currentCircle: null,
+      isMapShown: false,
     };
   },
   methods: {
@@ -70,8 +76,11 @@ export default {
       this.longitude = evt.latLng.lng();
       
     },
-    radiusChange(){
-
+    showMap(){
+      this.isMapShown = true;
+    },
+    hideMap(){
+      this.isMapShown = false;
     }
   }
 };
