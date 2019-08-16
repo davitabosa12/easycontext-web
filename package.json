@@ -1,28 +1,36 @@
 {
-  "name": "easycontext-web",
+  "name": "ec-vue",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.0.5"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "core-js": "^2.6.5",
+    "google-maps": "^3.3.0",
+    "google-maps-api-loader": "^1.1.1",
+    "repl": "^0.1.3",
+    "uuid": "^3.3.2",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.3",
+    "vue2-google-maps": "^0.10.7",
+    "vuedraggable": "^2.23.0",
+    "vuetify": "^2.0.5",
+    "vuex": "^3.0.1"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "homepage": "."
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.10.0",
+    "@vue/cli-plugin-eslint": "^3.10.0",
+    "@vue/cli-service": "^3.10.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "sass": "^1.17.4",
+    "sass-loader": "^7.1.0",
+    "vue-cli-plugin-vuetify": "^0.6.3",
+    "vue-template-compiler": "^2.6.10",
+    "vuetify-loader": "^1.2.2"
+  }
 }

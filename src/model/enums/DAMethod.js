@@ -1,0 +1,15 @@
+const DAMethod = {
+    STARTING: "DA.STARTING",
+    STOPPING: "DA.STOPPING",
+    DURING: "DA.DURING",
+    IN_VEHICLE:  "DA.IN_VEHICLE",
+    ON_BICYCLE: "DA.ON_BICYCLE",
+    ON_FOOT: "DA.ON_FOOT",
+    RUNNING: "DA.RUNNING",
+    STILL: "DA.STILL",
+    TILTING: "DA.TILTING",
+    UNKNOWN: "DA.UNKNOWN",
+    WALKING: "DA.WALKING",
+}
+
+export default DAMethod;
