@@ -1,5 +1,5 @@
 const timezones = [
-    { text: 'Device timezone', value: null },
+    { text: 'Device timezone', value: 'Device' },
     { text: 'Africa/Abidjan', value: 'Africa/Abidjan' },
     { text: 'Africa/Accra', value: 'Africa/Accra' },
     { text: 'Africa/Addis_Ababa', value: 'Africa/Addis_Ababa' },

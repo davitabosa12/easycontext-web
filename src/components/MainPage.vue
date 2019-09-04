@@ -48,7 +48,7 @@
         <h1>No rules registered</h1>
       </div>
       <div v-else v-for="element in rules" v-bind:key="element.name">
-        <RuleCard :name="element.name" :onDelete="performDelete" :onEdit="performEdit" />
+        <RuleCard :name="element.fence.name" :onDelete="performDelete" :onEdit="performEdit" />
       </div>
     </v-layout>
   </v-container>
@@ -61,10 +61,13 @@ export default {
   components: {
     RuleCard
   },
+  mounted(){
+    console.log(Store.getters);
+  },
   data: () => {
     return {
       dialog: false,
-      rules: Store.state.rules,
+      rules: Store.getters.fencesG,
       ruleName: ""
     };
   },
@@ -77,7 +80,7 @@ export default {
         alert("error");
       } else {
         //store data
-        Store.commit('createRule', this.$data.ruleName);
+        Store.commit('createFence', this.$data.ruleName);
         //reset ruleName model
         this.$data.ruleName = "";
         //dismiss dialog
@@ -87,7 +90,7 @@ export default {
     },
 
     performDelete(name) {
-      Store.commit('deleteRule', name)
+      Store.commit('deleteFence', name)
     },
     performEdit(name) {
       alert(`Routing to /${name}`)

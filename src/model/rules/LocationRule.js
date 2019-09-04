@@ -1,8 +1,8 @@
 import LocationMethod from "../enums/LocationMethod";
 export default class LocationRule{
-    entering(latitude, longitude, radius){
+    static entering(latitude, longitude, radius){
         return {
-            rule: "Location",
+            ruleName: "Location",
             method: LocationMethod.ENTERING,
             latitude: latitude,
             longitude: longitude,
@@ -10,9 +10,9 @@ export default class LocationRule{
         }
     }
 
-    exiting(latitude, longitude, radius){
+    static exiting(latitude, longitude, radius){
         return {
-            rule: "Location",
+            ruleName: "Location",
             method: LocationMethod.EXITING,
             latitude: latitude,
             longitude: longitude,
@@ -20,9 +20,9 @@ export default class LocationRule{
         }
     }
 
-    in(latitude, longitude, radius, dwell){
+    static in(latitude, longitude, radius, dwell){
         return {
-            rule: "Location",
+            ruleName: "Location",
             method: LocationMethod.IN,
             latitude: latitude,
             longitude: longitude,

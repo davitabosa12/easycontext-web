@@ -6,7 +6,7 @@ export default class AggregateRule{
      */
     static and(...rules){
         return {
-            rule: "Aggregate",
+            ruleName: "Aggregate",
             method: AggregateMethod.AND,
             rules: rules,
         }
@@ -18,7 +18,7 @@ export default class AggregateRule{
      */
     static or(...rules){
         return {
-            rule: "Aggregate",
+            ruleName: "Aggregate",
             method: AggregateMethod.OR,
             rules: rules,
         }        
@@ -30,9 +30,9 @@ export default class AggregateRule{
      */
     static not(rule){
         return {
-            rule: "Aggregate",
+            ruleName: "Aggregate",
             method: AggregateMethod.NOT,
-            negatedRule: rule,
+            rules: rule,
         }
     }
 }

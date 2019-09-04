@@ -13,7 +13,7 @@
       <v-btn
         text
         color="primary accent-4"
-        v-on:click="editAction"
+        :to="'/edit/' + name"
       >
         Edit
       </v-btn>

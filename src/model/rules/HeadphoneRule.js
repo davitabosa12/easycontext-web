@@ -7,19 +7,19 @@ export default class HeadphoneRule{
 
     static pluggingIn(){
         return {
-            rule: "Headphone",
+            ruleName: "Headphone",
             method: HeadphoneMethod.PLUGGING_IN,
         }
     }
     static unplugging(){
         return {
-            rule: "Headphone",
+            ruleName: "Headphone",
             method: HeadphoneMethod.UNPLUGGING,
         }
     }
     static during(state){
         return {
-            rule: "Headphone",
+            ruleName: "Headphone",
             method: HeadphoneMethod.DURING,
             headphoneState: state,
         }

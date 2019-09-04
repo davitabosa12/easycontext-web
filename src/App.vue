@@ -24,7 +24,7 @@
 
 <script>
 
-
+import exporter from "./exporter"
 export default {
   name: 'App',
   data: () => ({
@@ -32,7 +32,17 @@ export default {
   }),
   methods:{
     exportJSON() {
-      alert("exportJSON");
+      let result = exporter(this.$store.getters.fencesG);
+      if(result.error){
+        alert(`${result.error.cause} in fence ${result.error.where}`);
+        return;
+      }
+      const url = window.URL.createObjectURL(new Blob([result.json]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', 'configuration.json') //or any other extension
+      document.body.appendChild(link)
+      link.click()
     }
   }
 };
