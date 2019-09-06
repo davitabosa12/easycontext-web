@@ -19,8 +19,8 @@
     </v-card-title>
     <v-card-text>
       <v-text-field label="Notification Title" v-model="title"></v-text-field>
-      <v-text-field label="Notification Text" v-model="channel"></v-text-field>
-      <v-text-field label="Notification Channel" v-model="text"></v-text-field>
+      <v-text-field label="Notification Text" v-model="text"></v-text-field>
+      <v-text-field label="Notification Channel" v-model="channel"></v-text-field>
       <v-select :items="importanceModel" v-model="importance"></v-select>
     </v-card-text>
   </v-card>

@@ -254,11 +254,11 @@ export default {
       obj.isMini = this.isMini;
       switch (this.selected) {
         case AggregateMethod.AND: {
-          rule = AggregateRule.and([this.ruleLeft, this.ruleRight]);
+          rule = AggregateRule.and(this.ruleLeft.rule, this.ruleRight.rule);
           break;
         }
         case AggregateMethod.OR: {
-          rule = AggregateRule.or([this.ruleLeft, this.ruleRight]);
+          rule = AggregateRule.or(this.ruleLeft, this.ruleRight);
           break;
         }
         case AggregateMethod.NOT: {
