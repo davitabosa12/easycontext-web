@@ -51,11 +51,6 @@
         </v-navigation-drawer>
       </v-flex>
       <v-flex sm9>
-        <v-tabs v-model="tab" fixed-tabs background-color="orange">
-          <v-tab>Rules</v-tab>
-          <v-tab>Actions</v-tab>
-
-          <v-tab-item>
             <v-container align-start justify-space-between>
               <v-layout wrap align-start justify-start ref="container">
                 <v-flex sm6 md4 v-for="item in nonAggregateRules" :key="item.id">
@@ -86,15 +81,9 @@
                     />
                   </v-flex>
                 </v-flex>
-                <v-flex sm12 md12 v-for="item in aggregateRules" :key="item.id">
-                  <v-flex>
-                    <AggregateCard :id="item.id" :onDelete="deleteRule" :onChange="updateRule" />
-                  </v-flex>
-                </v-flex>
+             
               </v-layout>
             </v-container>
-          </v-tab-item>
-          <v-tab-item>
             <v-container align-start justify-space-between>
               <v-layout wrap align-start justify-start>
                 <v-flex sm6 md4 v-for="item in workarea_actions" :key="item.id">
@@ -104,8 +93,6 @@
                 </v-flex>
               </v-layout>
             </v-container>
-          </v-tab-item>
-        </v-tabs>
       </v-flex>
     </v-layout>
   </v-container>
