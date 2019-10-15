@@ -61,7 +61,7 @@
         <v-container align-start justify-space-between fluid>
           Conditions
           <v-layout wrap align-start justify-start ref="container" class="workarea">
-            <v-flex v-for="item in nonAggregateRules" :key="item.id" sm6 md4>
+            <v-flex v-for="(item, index) in nonAggregateRules" :key="item.id" sm6 md4>
               <v-flex>
                 <v-flex>
                   <HeadphoneCard
@@ -69,7 +69,7 @@
                     :id="item.id"
                     :onDelete="deleteRule"
                     :onChange="updateRule"
-                  />
+                  ></HeadphoneCard>
                   <LocationCard
                     v-else-if="item.title === 'Location'"
                     :id="item.id"
@@ -88,6 +88,11 @@
                     :onDelete="deleteRule"
                     :onChange="updateRule"
                   />
+                  <div v-if="multipleRules && index < nonAggregateRules.length -1">
+                    <v-btn color="pink" dark small bottom left fab>
+                      <v-icon>mdi-plus</v-icon>
+                    </v-btn>
+                  </div>
                 </v-flex>
               </v-flex>
             </v-flex>
@@ -169,6 +174,12 @@ export default {
       return this.workarea_rules.filter(element => {
         return element.title === "Aggregate";
       });
+    },
+    multipleRules() {
+      var non = this.workarea_rules.filter(element => {
+        return element.title !== "Aggregate";
+      });
+      return non.length > 1;
     }
   },
   data() {
@@ -277,9 +288,9 @@ export default {
   height: 250px;
 }
 .workarea {
-  width: 100%;
+  width: 100px;
   height: 70vh;
-  overflow-y: auto;
+  overflow-x: auto;
   margin: 0%;
   padding: 0;
 }
