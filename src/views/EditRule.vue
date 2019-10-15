@@ -37,7 +37,12 @@
 
             <v-divider></v-divider>
             <v-list dense nav>
-              <v-list-item v-for="item in actions" :key="item.title" link @click="actionClick(item)">
+              <v-list-item
+                v-for="item in actions"
+                :key="item.title"
+                link
+                @click="actionClick(item)"
+              >
                 <v-list-item-icon>
                   <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-icon>
@@ -51,48 +56,69 @@
         </v-navigation-drawer>
       </v-flex>
       <v-flex sm9>
-            <v-container align-start justify-space-between>
-              <v-layout wrap align-start justify-start ref="container">
-                <v-flex sm6 md4 v-for="item in nonAggregateRules" :key="item.id">
-                  <v-flex>
-                    <HeadphoneCard
-                      v-if="item.title === 'Headphone'"
-                      :id="item.id"
-                      :onDelete="deleteRule"
-                      :onChange="updateRule"
-                    />
-                    <LocationCard
-                      v-else-if="item.title === 'Location'"
-                      :id="item.id"
-                      :onDelete="deleteRule"
-                      :onChange="updateRule"
-                    />
-                    <TimeCard
-                      v-else-if="item.title === 'Time'"
-                      :id="item.id"
-                      :onDelete="deleteRule"
-                      :onChange="updateRule"
-                    />
-                    <ActivityCard
-                      v-else-if="item.title === 'Activity'"
-                      :id="item.id"
-                      :onDelete="deleteRule"
-                      :onChange="updateRule"
-                    />
-                  </v-flex>
+        <v-divider></v-divider>
+
+        <v-container align-start justify-space-between fluid>
+          Conditions
+          <v-layout wrap align-start justify-start ref="container" class="workarea">
+            <v-flex v-for="item in nonAggregateRules" :key="item.id" sm6 md4>
+              <v-flex>
+                <v-flex>
+                  <HeadphoneCard
+                    v-if="item.title === 'Headphone'"
+                    :id="item.id"
+                    :onDelete="deleteRule"
+                    :onChange="updateRule"
+                  />
+                  <LocationCard
+                    v-else-if="item.title === 'Location'"
+                    :id="item.id"
+                    :onDelete="deleteRule"
+                    :onChange="updateRule"
+                  />
+                  <TimeCard
+                    v-else-if="item.title === 'Time'"
+                    :id="item.id"
+                    :onDelete="deleteRule"
+                    :onChange="updateRule"
+                  />
+                  <ActivityCard
+                    v-else-if="item.title === 'Activity'"
+                    :id="item.id"
+                    :onDelete="deleteRule"
+                    :onChange="updateRule"
+                  />
                 </v-flex>
-             
-              </v-layout>
-            </v-container>
-            <v-container align-start justify-space-between>
-              <v-layout wrap align-start justify-start>
-                <v-flex sm6 md4 v-for="item in workarea_actions" :key="item.id">
-                  <CustomActionCard v-if="item.title === 'Custom action'" :id="item.id" :onDelete="deleteAction" :onChange="updateAction"/>
-                  <NotificationActionCard v-if="item.title === 'Send notification'" :id="item.id" :onDelete="deleteAction" :onChange="updateAction" />
-                  <VibrateActionCard v-if="item.title === 'Vibrate device'" :id="item.id" :onDelete="deleteAction" :onChange="updateAction" />
-                </v-flex>
-              </v-layout>
-            </v-container>
+              </v-flex>
+            </v-flex>
+          </v-layout>
+        </v-container>
+        <v-divider></v-divider>
+        <v-container align-start justify-space-between>
+          Actions
+          <v-layout wrap align-start justify-start>
+            <v-flex sm6 md4 v-for="item in workarea_actions" :key="item.id">
+              <CustomActionCard
+                v-if="item.title === 'Custom action'"
+                :id="item.id"
+                :onDelete="deleteAction"
+                :onChange="updateAction"
+              />
+              <NotificationActionCard
+                v-if="item.title === 'Send notification'"
+                :id="item.id"
+                :onDelete="deleteAction"
+                :onChange="updateAction"
+              />
+              <VibrateActionCard
+                v-if="item.title === 'Vibrate device'"
+                :id="item.id"
+                :onDelete="deleteAction"
+                :onChange="updateAction"
+              />
+            </v-flex>
+          </v-layout>
+        </v-container>
       </v-flex>
     </v-layout>
   </v-container>
@@ -103,7 +129,6 @@ import HeadphoneCard from "../components/cards/HeadphoneCard";
 import ActivityCard from "../components/cards/ActivityCard";
 import LocationCard from "../components/cards/LocationCard";
 import TimeCard from "../components/cards/TimeCard";
-import AggregateCard from "../components/cards/AggregateCard";
 import NotificationActionCard from "../components/cards/NotificationActionCard";
 import VibrateActionCard from "../components/cards/VibrateActionCard";
 import CustomActionCard from "../components/cards/CustomActionCard";
@@ -116,7 +141,6 @@ export default {
     ActivityCard,
     LocationCard,
     TimeCard,
-    AggregateCard,
     NotificationActionCard,
     VibrateActionCard,
     CustomActionCard
@@ -131,7 +155,9 @@ export default {
   mounted() {
     this.workarea_rules =
       Store.getters.fenceInfo(this.$router.currentRoute.params.name) || [];
-      this.workarea_actions = this.$store.getters.actionInfo(this.$router.currentRoute.params.name) || [];
+    this.workarea_actions =
+      this.$store.getters.actionInfo(this.$router.currentRoute.params.name) ||
+      [];
   },
   computed: {
     nonAggregateRules() {
@@ -251,8 +277,9 @@ export default {
   height: 250px;
 }
 .workarea {
-  width: 100vh;
-  height: 100vh;
+  width: 100%;
+  height: 70vh;
+  overflow-y: auto;
   margin: 0%;
   padding: 0;
 }
