@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import HomeToolbar from './views/HomeToolbar.vue'
+import EditToolbar from './views/EditToolbar.vue'
+import EditRule from './views/EditRule.vue'
 
 Vue.use(Router)
 
@@ -9,7 +12,10 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      components:{
+        default: Home,
+        navigation: HomeToolbar
+      } 
     },
     {
       path: '/about',
@@ -22,12 +28,10 @@ export default new Router({
     {
       path: '/edit/:name',
       name: 'edit',
-      component: () => import('./views/EditRule.vue')
+      components: {
+        default : EditRule,
+        navigation: EditToolbar,
+      },
     },
-    {
-      path: '/map',
-      name: 'map',
-      component: () => import('./views/GoogleMapTest.vue')
-    }
   ]
 })

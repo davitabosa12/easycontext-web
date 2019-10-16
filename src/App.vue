@@ -1,22 +1,9 @@
 <template>
   <v-app>
-    <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Easy</span>
-        <span class="font-weight-light">Context</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        text
-        href=""
-        target="_blank"
-        v-on:click="exportJSON"
-      >
-        <span class="mr-2">Export</span>
-      </v-btn>
-    </v-app-bar>
+    
 
     <v-content>
+      <router-view name="navigation"></router-view>
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -43,6 +30,12 @@ export default {
       link.setAttribute('download', 'configuration.json') //or any other extension
       document.body.appendChild(link)
       link.click()
+    }
+  },
+  computed:{
+    isHomePage(){
+      console.log(this.$router.history.current.path + "");
+      return this.$router.history.current.path;
     }
   }
 };
