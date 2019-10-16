@@ -39,28 +39,30 @@ export default new Vuex.Store({
       else
         console.log("error")
     },
-    updateRulesInFence(state, {fenceName, rules, componentState}){
+    updateRulesInFence(state, {fenceName, rules, operators, componentState}){
       console.log("updateRule: " + fenceName);
       let index = state.fences.findIndex( value =>{
         return value.fence.name === fenceName;
       });
       if(index > -1){
         state.fences[index].rule = rules;
-        state.fences[index].components.add(componentState.id)
+        state.fences[index].components.add(componentState.id);
+        state.fences[index].operators = operators;
         console.log("Update successful");
       } else {
         console.error(`${fenceName} not found in Store.`)
       }
 
     },
-    updateActionsInFence(state, {fenceName, actions, componentState}){
+    updateActionsInFence(state, {fenceName, actions, operators, componentState}){
       console.log("updateAction: " + fenceName);
       let index = state.fences.findIndex( value =>{
         return value.fence.name === fenceName;
       });
       if(index > -1){
         state.fences[index].action = actions;
-        state.fences[index].components.add(componentState.id)
+        state.fences[index].components.add(componentState.id);
+        state.fences[index].operators = operators;
         console.log("Update successful");
       } else {
         console.error(`${fenceName} not found in Store.`);

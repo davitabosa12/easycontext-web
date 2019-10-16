@@ -7,7 +7,7 @@
     </div>
 
     <div v-if="!isMini">
-      <v-card max-width="500px" min-height="500px">
+      <v-card min-width="300px" max-width="300px" max-height="430px" min-height="430px">
         <v-card-title>
           <v-layout wrap>
             <v-flex sm6>

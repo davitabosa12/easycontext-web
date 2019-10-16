@@ -8,19 +8,26 @@ function readData(fences) {
     fences.forEach(element => {
         let fenceObj = new Fence(element.fence.name);
         fenceObj.action = [];
-        console.log(element)
         let rules;
-        if(!element.rule){
+        if(!element.rule || element.rule.length == 0){
             error = {
-                cause: "no rules in fence",
+                cause: "No conditions in rule",
                 where: element.fence.name,
             }
             return;
         }
-        if (element.rule.length > 1) {
-            for (let i = 0; i < element.rule.length; i++) {
-                if (i < 2) {
-                    rules = AggregateRule.or(element.rule[0].rule, element.rule[1].rule);
+        if(element.rule.length > 1){
+            //combine into operators.
+            if(element.operators[0].operation === "and"){
+                rules = AggregateRule.and(element.rule[0].rule, element.rule[1].rule);
+            } else {
+                rules = AggregateRule.or(element.rule[0].rule, element.rule[1].rule);
+            }
+            
+            for(var i = 2; i < element.rule.length; i++){
+                let op = element.operators[i - 1].operation;
+                if(op === "and"){
+                    rules = AggregateRule.and(rules, element.rule[i].rule);
                 } else {
                     rules = AggregateRule.or(rules, element.rule[i].rule);
                 }
@@ -28,12 +35,12 @@ function readData(fences) {
         } else {
             rules = element.rule[0].rule;
         }
-
-        if(!element.action){
+        if(!element.action || element.action.length == 0){
             error = {
-                cause: "no actions in fence",
+                cause: "No actions in rule",
                 where: element.fence.name
             }
+            return;
         }
         for (let i = 0; i < element.action.length; i++) {
             // TODO: Check for error in each Action.

@@ -1,43 +1,47 @@
 <template>
   <div>
-    <div v-if="isMini">
-      <v-card max-width="70" max-height="70" v-on:dblclick="toggleMini">
-        <v-icon size="70" @click="toggleMini">headset</v-icon>
-      </v-card>
-    </div>
-    <div v-else>
-      <v-card max-width="500px" min-height="500px" v-on:dblclick="toggleMini">
-        <div>
-          <v-card-title>
-            <v-layout wrap>
-              <v-flex sm6>
-                <span>Headphone</span>
-              </v-flex>
-              <v-flex sm6>
-                <v-layout wrap>
-                  <v-flex sm8></v-flex>
-                  <v-flex sm2>
-                    <v-btn icon small color="red" @click="performDelete">
-                      <v-icon small>delete</v-icon>
-                    </v-btn>
-                  </v-flex>
-                  <v-flex sm2>
-                    <v-btn small icon text @click="toggleMini">
-                      <v-icon small>minimize</v-icon>
-                    </v-btn>
-                  </v-flex>
-                </v-layout>
-              </v-flex>
-            </v-layout>
-          </v-card-title>
-          <v-container>
-            <v-layout wrap>
-              <v-select :items="methods" v-model="selected" label="Method"></v-select>
-            </v-layout>
-          </v-container>
-        </div>
-      </v-card>
-    </div>
+    <v-card v-if="isMini" max-width="70" max-height="70" v-on:dblclick="toggleMini">
+      <v-icon size="70" @click="toggleMini">headset</v-icon>
+    </v-card>
+
+    <v-card
+      v-else
+      min-width="300px"
+      max-width="300px"
+      max-height="430px"
+      min-height="430px"
+      v-on:dblclick="toggleMini"
+    >
+      <div>
+        <v-card-title>
+          <v-layout wrap>
+            <v-flex sm6>
+              <span>Headphone</span>
+            </v-flex>
+            <v-flex sm6>
+              <v-layout wrap>
+                <v-flex sm8></v-flex>
+                <v-flex sm2>
+                  <v-btn icon small color="red" @click="performDelete">
+                    <v-icon small>delete</v-icon>
+                  </v-btn>
+                </v-flex>
+                <v-flex sm2>
+                  <v-btn small icon text @click="toggleMini">
+                    <v-icon small>minimize</v-icon>
+                  </v-btn>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+          </v-layout>
+        </v-card-title>
+        <v-container>
+          <v-layout wrap>
+            <v-select :items="methods" v-model="selected" label="Method"></v-select>
+          </v-layout>
+        </v-container>
+      </div>
+    </v-card>
   </div>
 </template>
 
@@ -50,9 +54,9 @@ export default {
     onDelete: Function,
     onChange: Function
   },
-  mounted: function(){
+  mounted: function() {
     const prevState = this.$store.getters.componentState(this.id);
-    if(prevState){
+    if (prevState) {
       this.selected = prevState.selected || this.selected;
       this.isMini = prevState.isMini || this.isMini;
     }
@@ -60,7 +64,7 @@ export default {
   },
   watch: {
     selected(value) {
-      this.sendData(value)
+      this.sendData(value);
     }
   },
   data: () => {
@@ -79,7 +83,7 @@ export default {
     },
     performDelete() {
       try {
-        this.$store.commit('removeComponent', this.id);
+        this.$store.commit("removeComponent", this.id);
         this.$props.onDelete(this.id);
       } catch (error) {
         console.log(
@@ -88,16 +92,22 @@ export default {
         console.error(error);
       }
     },
-    sendData(){
+    sendData() {
       let obj = {};
       obj.id = this.id;
       obj.selected = this.selected;
       obj.isMini = this.isMini;
       try {
         if (this.selected === HeadphoneMethod.PLUGGING_IN) {
-          this.onChange(this.id, {rule: HeadphoneRule.pluggingIn(), componentState: obj});
+          this.onChange(this.id, {
+            rule: HeadphoneRule.pluggingIn(),
+            componentState: obj
+          });
         } else if (this.selected === HeadphoneMethod.UNPLUGGING) {
-          this.onChange(this.id, {rule: HeadphoneRule.unplugging(), componentState: obj});
+          this.onChange(this.id, {
+            rule: HeadphoneRule.unplugging(),
+            componentState: obj
+          });
         }
       } catch (error) {
         console.log(error);
