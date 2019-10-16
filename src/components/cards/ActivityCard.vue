@@ -6,7 +6,7 @@
       </v-card>
     </div>
     <div v-else>
-      <v-card max-width="500px" min-height="500px">
+      <v-card min-width="300px" max-width="300px" max-height="430px" min-height="430px">
         <v-card-title>
           <v-layout wrap>
             <v-flex sm6>
@@ -29,8 +29,8 @@
             </v-flex>
           </v-layout>
         </v-card-title>
-        <v-container fluid>
-          <v-layout wrap>
+        <v-container >
+          <v-layout wrap align-start justify-space-between>
             <v-flex>
               <v-select :items="methods" v-model="selected" label="Method"></v-select>
             </v-flex>

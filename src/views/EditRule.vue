@@ -2,11 +2,11 @@
   <v-container fluid grid-list-md fill-height>
     <v-layout wrap>
       <v-flex d-flex sm3>
-        <v-navigation-drawer permanent>
+        <v-navigation-drawer permanent absolute>
           <v-layout d-flex align-space-around justify-center column class="items">
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title class="title">Rules</v-list-item-title>
+                <v-list-item-title class="title">Conditions</v-list-item-title>
                 <v-list-item-subtitle>Lorem ipsum dolor sit amet</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -37,7 +37,12 @@
 
             <v-divider></v-divider>
             <v-list dense nav>
-              <v-list-item v-for="item in actions" :key="item.title" link @click="actionClick(item)">
+              <v-list-item
+                v-for="item in actions"
+                :key="item.title"
+                link
+                @click="actionClick(item)"
+              >
                 <v-list-item-icon>
                   <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-icon>
@@ -51,75 +56,92 @@
         </v-navigation-drawer>
       </v-flex>
       <v-flex sm9>
-        <v-tabs v-model="tab" fixed-tabs background-color="orange">
-          <v-tab>Rules</v-tab>
-          <v-tab>Actions</v-tab>
+        <v-divider></v-divider>
 
-          <v-tab-item>
-            <v-container align-start justify-space-between>
-              <v-layout wrap align-start justify-start ref="container">
-                <v-flex sm6 md4 v-for="item in nonAggregateRules" :key="item.id">
-                  <v-flex>
-                    <HeadphoneCard
-                      v-if="item.title === 'Headphone'"
-                      :id="item.id"
-                      :onDelete="deleteRule"
-                      :onChange="updateRule"
-                    />
-                    <LocationCard
-                      v-else-if="item.title === 'Location'"
-                      :id="item.id"
-                      :onDelete="deleteRule"
-                      :onChange="updateRule"
-                    />
-                    <TimeCard
-                      v-else-if="item.title === 'Time'"
-                      :id="item.id"
-                      :onDelete="deleteRule"
-                      :onChange="updateRule"
-                    />
-                    <ActivityCard
-                      v-else-if="item.title === 'Activity'"
-                      :id="item.id"
-                      :onDelete="deleteRule"
-                      :onChange="updateRule"
-                    />
-                  </v-flex>
-                </v-flex>
-                <v-flex sm12 md12 v-for="item in aggregateRules" :key="item.id">
-                  <v-flex>
-                    <AggregateCard :id="item.id" :onDelete="deleteRule" :onChange="updateRule" />
-                  </v-flex>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-tab-item>
-          <v-tab-item>
-            <v-container align-start justify-space-between>
-              <v-layout wrap align-start justify-start>
-                <v-flex sm6 md4 v-for="item in workarea_actions" :key="item.id">
-                  <CustomActionCard v-if="item.title === 'Custom action'" :id="item.id" :onDelete="deleteAction" :onChange="updateAction"/>
-                  <NotificationActionCard v-if="item.title === 'Send notification'" :id="item.id" :onDelete="deleteAction" :onChange="updateAction" />
-                  <VibrateActionCard v-if="item.title === 'Vibrate device'" :id="item.id" :onDelete="deleteAction" :onChange="updateAction" />
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-tab-item>
-        </v-tabs>
+        <v-container align-start justify-space-between fluid>
+          Conditions
+          <v-layout wrap align-start justify-start ref="container" class="workarea">
+            <v-row class>
+              <v-container align-center>
+                <v-layout align-start justify-start>
+                  <div v-for="(item, index) in nonAggregateRules" :key="item.id" class="item">
+                    <v-layout align-center justify-space-between ref="rulesContainer">
+                      <v-col>
+                        <HeadphoneCard
+                          v-if="item.title === 'Headphone'"
+                          :id="item.id"
+                          :onDelete="deleteRule"
+                          :onChange="updateRule"
+                        ></HeadphoneCard>
+
+                        <LocationCard
+                          v-else-if="item.title === 'Location'"
+                          :id="item.id"
+                          :onDelete="deleteRule"
+                          :onChange="updateRule"
+                        />
+                        <TimeCard
+                          v-else-if="item.title === 'Time'"
+                          :id="item.id"
+                          :onDelete="deleteRule"
+                          :onChange="updateRule"
+                        />
+                        <ActivityCard
+                          v-else-if="item.title === 'Activity'"
+                          :id="item.id"
+                          :onDelete="deleteRule"
+                          :onChange="updateRule"
+                        />
+                      </v-col>
+                      <v-col v-if="multipleRules && index < nonAggregateRules.length - 1">
+                        <OperatorButton :onChange="operatorChange" :id="index"/>
+                      </v-col>
+                    </v-layout>
+                  </div>
+                </v-layout>
+              </v-container>
+            </v-row>
+          </v-layout>
+        </v-container>
+        <v-divider></v-divider>
+        <v-container align-start justify-space-between class="workarea">
+          Actions
+          <v-layout wrap align-start justify-start>
+            <v-flex sm6 md4 v-for="item in workarea_actions" :key="item.id">
+              <CustomActionCard
+                v-if="item.title === 'Custom action'"
+                :id="item.id"
+                :onDelete="deleteAction"
+                :onChange="updateAction"
+              />
+              <NotificationActionCard
+                v-if="item.title === 'Send notification'"
+                :id="item.id"
+                :onDelete="deleteAction"
+                :onChange="updateAction"
+              />
+              <VibrateActionCard
+                v-if="item.title === 'Vibrate device'"
+                :id="item.id"
+                :onDelete="deleteAction"
+                :onChange="updateAction"
+              />
+            </v-flex>
+          </v-layout>
+        </v-container>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
-
 <script>
 import HeadphoneCard from "../components/cards/HeadphoneCard";
 import ActivityCard from "../components/cards/ActivityCard";
 import LocationCard from "../components/cards/LocationCard";
 import TimeCard from "../components/cards/TimeCard";
-import AggregateCard from "../components/cards/AggregateCard";
 import NotificationActionCard from "../components/cards/NotificationActionCard";
 import VibrateActionCard from "../components/cards/VibrateActionCard";
 import CustomActionCard from "../components/cards/CustomActionCard";
+import OperatorButton from "../components/OperatorButton";
 import Store from "../store";
 import UUID from "uuid/v1";
 
@@ -129,9 +151,9 @@ export default {
     ActivityCard,
     LocationCard,
     TimeCard,
-    AggregateCard,
     NotificationActionCard,
     VibrateActionCard,
+    OperatorButton,
     CustomActionCard
   },
   created() {
@@ -139,12 +161,15 @@ export default {
       !this.$store.getters.fenceExists(this.$router.currentRoute.params.name)
     ) {
       this.$router.push("/");
+      
     }
   },
   mounted() {
     this.workarea_rules =
       Store.getters.fenceInfo(this.$router.currentRoute.params.name) || [];
-      this.workarea_actions = this.$store.getters.actionInfo(this.$router.currentRoute.params.name) || [];
+    this.workarea_actions =
+      this.$store.getters.actionInfo(this.$router.currentRoute.params.name) ||
+      [];
   },
   computed: {
     nonAggregateRules() {
@@ -156,6 +181,12 @@ export default {
       return this.workarea_rules.filter(element => {
         return element.title === "Aggregate";
       });
+    },
+    multipleRules() {
+      var non = this.workarea_rules.filter(element => {
+        return element.title !== "Aggregate";
+      });
+      return non.length > 1;
     }
   },
   data() {
@@ -163,13 +194,14 @@ export default {
       workarea_rules: [],
       workarea_data: [],
       workarea_actions: [],
+      operators: [],
       tab: 0,
       items: [
         { title: "Headphone", icon: "headset", size: "sm6 md4" },
         { title: "Location", icon: "my_location", size: "sm6 md4" },
         { title: "Time", icon: "access_time", size: "sm6 md4" },
-        { title: "Activity", icon: "directions_run", size: "sm6 md4" },
-        { title: "Aggregate", icon: "add", size: "sm12 md8" }
+        { title: "Activity", icon: "directions_run", size: "sm6 md4" }
+        //  { title: "Aggregate", icon: "add", size: "sm12 md8" }
       ],
       actions: [
         { title: "Custom action", icon: "star" },
@@ -199,6 +231,13 @@ export default {
       let index = this.findRuleIndexWithId(id);
       if (index > -1) {
         this.workarea_rules.splice(index, 1);
+        //also remove from operators.
+        try{
+
+          this.operators.splice(index,1);
+        } catch {
+          // it was an invalid index, ignore it.
+        }
       } else {
         //error
       }
@@ -209,9 +248,11 @@ export default {
         let data = JSON.parse(JSON.stringify(this.workarea_rules[index])); //the data to be changed..
         data.rule = rule;
         this.workarea_rules.splice(index, 1, data);
+        
         Store.commit("updateRulesInFence", {
           fenceName: this.$router.currentRoute.params.name,
           rules: this.workarea_rules,
+          operators: this.operators,
           componentState: componentState
         });
         Store.commit("dumpComponent", componentState);
@@ -238,6 +279,7 @@ export default {
         Store.commit("updateActionsInFence", {
           fenceName: this.$router.currentRoute.params.name,
           actions: this.workarea_actions,
+          operators: this.operators,
           componentState: componentState
         });
         Store.commit("dumpComponent", componentState);
@@ -250,7 +292,16 @@ export default {
       } else {
         //error
       }
+    },
+    operatorChange(op){
+      try{
+        this.operators[op.id] = op;
+      } catch{
+        this.operators.push(op);
+      }
+      console.table(this.operators);
     }
+
   }
 };
 </script>
@@ -263,9 +314,19 @@ export default {
   width: 250px;
   height: 250px;
 }
+.scrolling-wrapper-flexbox {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: none;
+}
+
+.item {
+  flex: 0 0 auto;
+}
 .workarea {
-  width: 100vh;
-  height: 100vh;
+  width: 100%;
+  height: 70vh;
+  overflow-x: auto;
   margin: 0%;
   padding: 0;
 }

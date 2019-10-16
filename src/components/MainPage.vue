@@ -51,6 +51,19 @@
         <RuleCard :name="element.fence.name" :onDelete="performDelete" :onEdit="performEdit" />
       </div>
     </v-layout>
+    <v-snackbar
+      v-model="snackbar"
+      absolute
+    >
+      {{ snackbarMessage }}
+      <v-btn
+        color="pink"
+        text
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -68,16 +81,22 @@ export default {
     return {
       dialog: false,
       rules: Store.getters.fencesG,
-      ruleName: ""
+      ruleName: "",
+      snackbar: false,
+      snackbarMessage : "Default Message!"
     };
   },
   methods: {
     onNewRule() {
-      var exists = this.$data.rules.find(value => {
-        return value.name === this.$data.ruleName;
+      var exists = this.$data.rules.find((val) => {
+        console.log(val.fence.name);
+        return val.fence.name === this.$data.ruleName;
       });
-      if (exists !== undefined) {
-        alert("error");
+      if (exists) {
+        this.snackbarMessage = `Fence ${this.ruleName} already exists.`;
+        this.$data.dialog = false;
+        this.snackbar = true;
+        this.$data.ruleName = "";
       } else {
         //store data
         Store.commit('createFence', this.$data.ruleName);

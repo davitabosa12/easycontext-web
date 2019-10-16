@@ -7,7 +7,7 @@
     </div>
 
     <div v-if="!isMini">
-      <v-card max-width="500px" min-height="500px">
+      <v-card min-width="300px" max-width="300px" max-height="430px" min-height="430px">
         <v-card-title>
           <v-layout wrap>
             <v-flex sm6>
@@ -32,24 +32,10 @@
         </v-card-title>
         <v-container>
           <v-layout wrap>
-            <v-flex justify-space-around align-center align-content-center v-if="!isMapShown">
-              <v-btn @click="showMap">Show map</v-btn>
-            </v-flex>
-
-            <v-flex sm12 v-else>
-              <GoogleMap
-                apiKey="AIzaSyC0WCWP3cqhaoSIurtzxXA5Q1SFmTDqwnE"
-                :center="{lat: this.latitude, lng:this.longitude}"
-                :onClick="mapClick"
-                :markerPoint="{lat: Number(this.latitude), lng: Number(this.longitude)}"
-                :radius="Number(radius)"
-              />
-              <v-btn @click="hideMap">Hide map</v-btn>
-            </v-flex>
             <v-flex sm12>
               <v-select :items="methods" v-model="selected" label="Method"></v-select>
-              <v-text-field label="Latitude" type="number" v-model="latitude" disabled></v-text-field>
-              <v-text-field label="Longitude" type="number" v-model="longitude" disabled></v-text-field>
+              <v-text-field label="Latitude" type="number" v-model="latitude" step="0.00000000001" ></v-text-field>
+              <v-text-field label="Longitude" type="number" v-model="longitude" step="0.00000000001" ></v-text-field>
               <v-text-field label="Radius (meters)" type="number" min="0" v-model="radius"></v-text-field>
               <v-text-field
                 v-if="selected === 'LOCATION.IN'"
@@ -69,10 +55,9 @@
 <script>
 import LocationMethod from "../../model/enums/LocationMethod";
 import LocationRule from "../../model/rules/LocationRule"
-import GoogleMap from "../../components/GoogleMap";
+//import GoogleMap from "../../components/GoogleMap";
 export default {
   components: {
-    GoogleMap
   },
   props: {
     id: String,
@@ -88,7 +73,6 @@ export default {
       this.longitude = prevState.longitude || this.longitude;
       this.radius = prevState.radius || this.radius;
       this.dwellTime = prevState.dwellTime || this.dwellTime;
-      this.isMapShown = prevState.isMapShown || this.isMapShown;
       this.currentMarker = prevState.currentMarker || this.currentMarker;
       this.currentCircle = prevState.currentCircle || this.currentCircle;
     }
@@ -141,7 +125,6 @@ export default {
       obj.dwellTime = this.dwellTime;
       obj.currentMarker = this.currentMarker;
       obj.currentCircle = this.currentCircle;
-      obj.isMapShown = this.isMapShown;
       try {
       switch (this.selected) {
         case LocationMethod.ENTERING:
